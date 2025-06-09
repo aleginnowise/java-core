@@ -18,14 +18,12 @@ public class SalesAndCustomerAnalysisTest {
     SalesAndCustomerAnalysis analysis;
     private List<Order> orders;
 
-    // Set up all object
     @BeforeEach
     public void setUp() {
         analysis = new SalesAndCustomerAnalysis();
         orders = new AnalysisTestService().createOrders();
     }
 
-    // List of unique cities where orders came from
     @Test
     public void givenOrderList_whenGetUniqueCities_thenReturnsUniqueCities() {
         List<String> uniqueCities = analysis.uniqueCities(orders);
@@ -35,16 +33,13 @@ public class SalesAndCustomerAnalysisTest {
         assertTrue(uniqueCities.containsAll(expectedCities));
     }
 
-    // Total income for all completed orders
     @Test
     public void givenOrderList_whenTotalIncomeDeliveredOrders_thenReturnsTotalIncome() {
-        // 1495 + (30 × 9.95) + (5 × 35) + (3 × 26) + (3 × 26) + (2 × 72) + 215 + 150 + 1285 + 2*5 = 3928.5
         double expectedIncome = 3928.5;
 
         assertEquals(expectedIncome, analysis.totalIncomeDeliveredOrders(orders));
     }
 
-    // The most popular product by sales
     @Test
     public void givenOrderList_whenGetMostPopularProduct_thenReturnsMostPopularProduct() {
         Optional<String> expectedItem = "Gel Ice Pack".describeConstable();
@@ -52,16 +47,13 @@ public class SalesAndCustomerAnalysisTest {
         assertEquals(expectedItem, analysis.mostPopularProduct(orders));
     }
 
-    // Average check for successfully delivered orders
     @Test
     public void givenOrderList_whenGetAverageCheckForDeliveredOrders_thenReturnsAverageCheckValue() {
-        // 3928.5 / 9 = 436.5
         OptionalDouble expectedItem = OptionalDouble.of(436.5);
 
         assertEquals(expectedItem, analysis.avgOfDeliveredOrders(orders));
     }
 
-    // Customers who have more than 5 orders
     @Test
     public void givenOrderList_whenGetCustomersWithFiveOrdersOrMore_thenReturnsCustomers() {
         List<Customer> customersAnalysis = analysis.customersWithFiveOrdersOrMore(orders);

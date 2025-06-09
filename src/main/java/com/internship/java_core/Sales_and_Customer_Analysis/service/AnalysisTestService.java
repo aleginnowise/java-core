@@ -17,7 +17,6 @@ public class AnalysisTestService {
     public List<Order> createOrders(){
         List<Order> orders = new ArrayList<>();
 
-        // Create clients
         Customer sigma = new Customer("1", "Sigma", "sigma@mail.com",
                 LocalDateTime.of(2020, 1, 5, 10, 0), 25, "New York");
 
@@ -33,7 +32,6 @@ public class AnalysisTestService {
         Customer lupa = new Customer("5", "Lupa", "lupa@mail.com",
                 LocalDateTime.of(2018, 8, 16, 10, 0), 20, "Lublin");
 
-        // Create orders with order items
         orders.add(new Order(
                 "1",
                 LocalDateTime.of(2025, 6, 8, 14, 44),
@@ -80,7 +78,6 @@ public class AnalysisTestService {
                 ),
                 PROCESSING));
 
-        // Create order item for pupa and lupa
         OrderItem piggyBank = new OrderItem("1920s ANTIQUE DECORATIVE BRASS PIGGY BANK", 1, 1285, Category.HOME);
 
         orders.add(new Order("6",

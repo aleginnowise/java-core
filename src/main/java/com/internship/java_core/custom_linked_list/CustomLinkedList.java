@@ -16,7 +16,6 @@ public class CustomLinkedList<E> {
         Node<E> newNode = new Node<>(null, value, currentFirstNode);
         firstNode = newNode;
 
-        // If there is no first node, the new node becomes the only node in the list.
         if (currentFirstNode == null)
             lastNode = newNode;
         else
@@ -30,7 +29,6 @@ public class CustomLinkedList<E> {
         Node<E> newNode = new Node<>(currentLastNode, value, null);
         lastNode = newNode;
 
-        // If there is no last node, the new node becomes the only node in the list.
         if (currentLastNode == null)
             firstNode = newNode;
         else
@@ -46,7 +44,6 @@ public class CustomLinkedList<E> {
 
         Node<E> newNode = new Node<>(null, value, null);
 
-        // If there is no first node, the new node becomes the only node in the list.
         if (firstNode == null && index == 0) {
             firstNode = newNode;
             lastNode = newNode;
@@ -54,18 +51,15 @@ public class CustomLinkedList<E> {
             size++;
             return true;
         }
-        // If index is 0, the new node will be first node
         if (index == 0) {
             addFirst(value);
             return true;
         }
-        // If index equals size, the new node will be last node
         if (index == size) {
             addLast(value);
             return true;
         }
 
-        // Find node by index and change linking
         Node<E> currentNode = findNodeByIndex(index);
         Node<E> previousNode = currentNode.prevNode;
 
@@ -101,12 +95,10 @@ public class CustomLinkedList<E> {
         Node<E> currentNode = new Node<>(null, getFirst(), null);
         Node<E> nodeAfterCurrent;
 
-        // If the second node exists, linking will be edited
         if (firstNode.nextNode != null) {
             nodeAfterCurrent = firstNode.nextNode;
             nodeAfterCurrent.prevNode = null;
             firstNode = nodeAfterCurrent;
-        // If the first is the only one, just delete it
         } else {
             firstNode = null;
         }
@@ -130,11 +122,9 @@ public class CustomLinkedList<E> {
             throw new IndexOutOfBoundsException("Index is greater size. Index: " + index + ", Size: " + size);
         }
 
-        // If index is 0, return and remove first node
         if (index == 0) {
             return removeFirst();
         }
-        // If index equals size - 1, return and remove last node
         if (index == size - 1) {
             return removeLast();
         }
@@ -145,7 +135,6 @@ public class CustomLinkedList<E> {
         Node<E> nodeBeforeCurrent = currrentNode.prevNode;
         Node<E> nodeAfterCurrent = currrentNode.nextNode;
 
-        // Unlink current node by connecting its previous and next nodes
         nodeBeforeCurrent.nextNode = nodeAfterCurrent;
         nodeAfterCurrent.prevNode = nodeBeforeCurrent;
 

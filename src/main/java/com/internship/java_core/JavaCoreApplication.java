@@ -32,9 +32,6 @@ public class JavaCoreApplication {
         linkedList.add("MUSIC");
 
         Stream<String> twitchStream = linkedList.stream();
-/*        twitchStream.forEach((s) -> {
-            System.out.println(s);
-        });*/
         twitchStream.forEach(System.out::println);
 
     }
