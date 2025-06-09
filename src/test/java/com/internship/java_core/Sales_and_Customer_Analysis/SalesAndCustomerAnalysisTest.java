@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SalesAndCustomerAnalysisTest {
     SalesAndCustomerAnalysis analysis;
@@ -39,12 +38,10 @@ public class SalesAndCustomerAnalysisTest {
     // Total income for all completed orders
     @Test
     public void givenOrderList_whenTotalIncomeDeliveredOrders_thenReturnsTotalIncome() {
-        double totalIncome = analysis.totalIncomeDeliveredOrders(orders);
+        // 1495 + (30 × 9.95) + (5 × 35) + (3 × 26) + (3 × 26) + (2 × 72) + 215 + 150 + 1285 + 2*5 = 3928.5
+        double expectedIncome = 3928.5;
 
-        // 1495 + (30 × 9.95) + (5 × 35) + (3 × 26) + (3 × 26) + (2 × 72) + 215 + 150 + 1285 + 1*5 = 3923.5
-        double expectedIncome = 3923.5;
-
-        assertEquals(expectedIncome, totalIncome);
+        assertEquals(expectedIncome, analysis.totalIncomeDeliveredOrders(orders));
     }
 
     // The most popular product by sales
@@ -58,8 +55,8 @@ public class SalesAndCustomerAnalysisTest {
     // Average check for successfully delivered orders
     @Test
     public void givenOrderList_whenGetAverageCheckForDeliveredOrders_thenReturnsAverageCheckValue() {
-        // 3923.5 / 4 = 980.875
-        OptionalDouble expectedItem = OptionalDouble.of(980.875);
+        // 3928.5 / 9 = 436.5
+        OptionalDouble expectedItem = OptionalDouble.of(436.5);
 
         assertEquals(expectedItem, analysis.avgOfDeliveredOrders(orders));
     }
@@ -71,11 +68,9 @@ public class SalesAndCustomerAnalysisTest {
         List<Customer> expectedCustomer = List.of(new Customer("5", "Lupa", "lupa@mail.com",
                 LocalDateTime.of(2018, 8, 16, 10, 0), 20, "Lublin"));
 
-        customersAnalysis.stream()
-                .map(Customer::getName)
-                .forEach(System.out::println);
+        boolean isMatch = customersAnalysis.stream()
+                .anyMatch(expectedCustomer::contains);
 
-        //TODO add assertation
-//        assertTrue(customersAnalysis.containsAll(expectedCustomer));
+        assertTrue(isMatch);
     }
 }
